@@ -30,7 +30,7 @@ button:hover {
   transform: translate(-50%, -50%);
 }
 
-.input-area {
+/* .input-area {
   background-color: #c1f6ff;
   width: 400px;
   height: 30px;
@@ -38,7 +38,7 @@ button:hover {
   margin: 8px;
   margin-top: 0px;
   border-radius: 8px;
-}
+} */
 
 .incomplete-area {
   background-color: #c6ffde;

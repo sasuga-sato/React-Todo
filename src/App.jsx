@@ -63,7 +63,13 @@ export const App = () => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={incompleteTodos.length >= 5}
       />
+      {incompleteTodos.length >= 5 && (
+        <p style={{ color: "white" }}>
+          登録できるTodoは5個までだ!　消化しな！！！！
+        </p>
+      )}
 
       {/* IncompleteTodoコンポーネントに送るprops */}
       {/*  ↓purops名は自分で決めていい*/}
