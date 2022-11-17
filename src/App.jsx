@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import "./styles.css";
+import { InputTodo } from "./components/InputTodo";
+import { IncompleteTodos } from "./components/IncompleteTodos";
+import { CompleteTodos } from "./components/CompleteTodos";
+
 export const App = () => {
   //未完了のTODO
   const [todoText, setTodoText] = useState("");
@@ -54,47 +58,23 @@ export const App = () => {
 
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="TODOを入力"
-          value={todoText}
-          onChange={onChangeTodoText}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      {/* InputTodosコンポーネントに送るprops */}
+      <InputTodo
+        todoText={todoText}
+        onChange={onChangeTodoText}
+        onClick={onClickAdd}
+      />
 
-      <div className="incomplete-area">
-        <p className="title">未完了のTODO</p>
-        <ul>
-          {/* 第二引数に順番が入る */}
-          {incompleteTodos.map((todo, index) => {
-            return (
-              // mapを使ってレンダリングする際にはkeyを設定
-              // 仮想DOMの差分を正確に反映するため何個目のループする際何個目のループなのか分かるようにkeyを設定
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                {/* 関数に引数をわたす際にはアロー関数で新しい関数を作る必要がある */}
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      {/* IncompleteTodoコンポーネントに送るprops */}
+      {/*  ↓purops名は自分で決めていい*/}
+      <IncompleteTodos
+        todos={incompleteTodos}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
 
-      <div className="complete-area">
-        <p className="title">完了したTODO</p>
-        <ul>
-          {completeTodos.map((todo, index) => {
-            return (
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onclick={() => onClickBack(index)}>戻す</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      {/* CompleteTodosコンポーネントに送るprops */}
+      <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
     </>
   );
 };
